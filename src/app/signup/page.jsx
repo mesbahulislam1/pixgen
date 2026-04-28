@@ -22,7 +22,7 @@ const SingUpPage = () => {
     image: image,
     
     });
-    console.log("Sing Up ",{data, error})
+    console.log({data, error})
 
   }
   return (
