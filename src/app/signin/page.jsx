@@ -3,51 +3,32 @@ import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
 import React from 'react'
-import { FaGoogle } from "react-icons/fa";
 
 
 
-const SingUpPage = () => {
+const SingInPage = () => {
 
   const handelSubmit =async(e)=>{
     e.preventDefault()
-    const name = e.target.name.value;
-    const image = e.target.image.value;
+
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const { data, error } = await authClient.signUp.email({
-    name: name, // required
+    const { data, error } = await authClient.signIn.email({
     email: email, // required
     password: password, // required
-    image: image,
+   
     
     });
     console.log({data, error})
 
   }
-
-  const SingInGoogle=async()=>{
-     const data = await authClient.signIn.social({
-    provider: "google",
-  });
-  }
   return (
      <Card className="border mx-auto w-125 py-10 mt-5" >
-      <h1 className="text-center text-2xl font-bold">Sign Up</h1>
+      <h1 className="text-center text-2xl font-bold">Sign In</h1>
 
       <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={handelSubmit}>
-        <TextField isRequired name="name" type="text">
-          <Label>Name</Label>
-          <Input placeholder="Enter your name" />
-          <FieldError />
-        </TextField>
-
-        <TextField isRequired name="image" type="text">
-          <Label>Image URL</Label>
-          <Input placeholder="Image URL" />
-          <FieldError />
-        </TextField>
+        
 
         <TextField
           isRequired
@@ -97,12 +78,8 @@ const SingUpPage = () => {
           </Button>
         </div>
       </Form>
-
-      <p className="text-center">Or</p>
-      <Button variant="outline" className={'w-full py-1'} onClick={SingInGoogle}><FaGoogle></FaGoogle> Sign In With Google</Button>
-
     </Card>
   )
 }
 
-export default SingUpPage
+export default SingInPage
